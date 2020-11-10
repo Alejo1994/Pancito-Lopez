@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pancitoLopez"
+    }
+  },
+  "defaultProject": "pancitoLopez",
+  "cli": {
+    "analytics": false
+  }
 }
