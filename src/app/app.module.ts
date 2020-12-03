@@ -9,6 +9,13 @@ import { AboutComponent } from './components/about/about.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+import { AngularFireModule } from '@angular/fire';
+import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+import { UploadImageComponent } from './shared/upload-image/upload-image.component';
+import { StorageService } from './shared/upload-image/services/storage.service';
+import { NgFilesDirective } from './shared/upload-image/directives/ng-files.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,13 +23,20 @@ import { FooterComponent } from './components/footer/footer.component';
     SliderComponent,
     AboutComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    UploadImageComponent,
+    NgFilesDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    StorageService,
+    {provide: BUCKET, useValue: 'gs://pancito-lopez.appspot.com'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

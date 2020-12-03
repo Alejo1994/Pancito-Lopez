@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "pancito-lopez"
+  },
+  "targets": {
+    "pancito-lopez": {
+      "hosting": {
+        "pancitoLopez": [
+          "pancito-lopez"
+        ]
+      }
+    }
   }
 }
