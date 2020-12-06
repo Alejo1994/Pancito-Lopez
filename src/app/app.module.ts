@@ -10,11 +10,14 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { AngularFireModule } from '@angular/fire';
-import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
+import { AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-import { UploadImageComponent } from './shared/upload-image/upload-image.component';
-import { StorageService } from './shared/upload-image/services/storage.service';
-import { NgFilesDirective } from './shared/upload-image/directives/ng-files.directive';
+import { ProductComponent } from './components/product/product.component';
+import { NgFilesDirective } from './directives/ng-files.directive';
+import { ProductService } from './services/product.service';
+import { FormsModule } from '@angular/forms';
+import { TableComponent } from './shared/table/table.component';
+import { CardsComponent } from './shared/cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -24,17 +27,20 @@ import { NgFilesDirective } from './shared/upload-image/directives/ng-files.dire
     AboutComponent,
     MenuComponent,
     FooterComponent,
-    UploadImageComponent,
-    NgFilesDirective
+    NgFilesDirective,
+    ProductComponent,
+    TableComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ],
   providers: [
-    StorageService,
+    ProductService,
     {provide: BUCKET, useValue: 'gs://pancito-lopez.appspot.com'}
   ],
   bootstrap: [AppComponent]

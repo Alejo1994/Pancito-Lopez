@@ -1,3 +1,14 @@
-.background {
-    background-color: white;
+.backgroundNew {
+    background-color: rgb(218, 26, 26, 0.73);
+    border: 2px dashed rgba(112, 37, 37, 0.73);
+    border-radius: 39px 0px 0px 0px;
+}
+
+h1, h2 {
+    font-family: 'Nerko One', cursive;
+    font-weight: bold;
+}
+
+h1{
+    border: 8px double rgba(0,0,0,0.73);
 }

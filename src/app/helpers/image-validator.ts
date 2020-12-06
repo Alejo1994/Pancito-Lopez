@@ -1,4 +1,4 @@
-import { FileItem } from '../models/fileItem';
+import { Product } from '../models/product';
 
 export class ImageValidator {
     private accptType = ['image/jpeg', 'image/png', 'image.jpg'];
@@ -7,9 +7,9 @@ export class ImageValidator {
         return fileType === '' || fileType === undefined ? false : this.accptType.includes(fileType);
     }
 
-    checkDropped(fileName: string, files: FileItem[]): boolean{
+    checkDropped(imageName: string, files: Product[]): boolean{
         for (const file of files){
-            if (fileName === fileName){
+            if (imageName === file.imageName){
                 return true;
             }
         }

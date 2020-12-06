@@ -1,13 +1,13 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { FileItem } from '../models/fileItem';
-import { ImageValidator } from '../helpers/imageValidator';
+import { ImageValidator } from '../helpers/image-validator';
+import { Product } from '../models/product';
 
 @Directive({
   selector: '[appNgFiles]'
 })
 export class NgFilesDirective extends ImageValidator {
 
-  @Input() files: FileItem[] = [];
+  @Input() files: Product[] = [];
   @Output() mouseOver: EventEmitter<boolean> = new EventEmitter();
 
   @HostListener('dragover', ['$event'])
@@ -27,7 +27,6 @@ export class NgFilesDirective extends ImageValidator {
     if (!dataTransfer) {
       return;
     }
-
     this.preventAndStop(event);
     this.extractFile(dataTransfer.files);
 
@@ -40,14 +39,23 @@ export class NgFilesDirective extends ImageValidator {
   }
 
   private extractFile(fileList: FileList) {
-      // tslint:disable-next-line: forin
-      for (const property in Object.getOwnPropertyNames(fileList)){
-        const tempFile = fileList[property];
-        if (this.canBeUpload(tempFile)){
-          const newFile = new FileItem(tempFile);
-          this.files.push(newFile);
+    // tslint:disable-next-line: forin
+    for (const property in Object.getOwnPropertyNames(fileList)){
+      const tempFile = fileList[property];
+      if (this.canBeUpload(tempFile)){
+        const newFile = new Product(tempFile);
+        
+        if(this.files.length === 0){
+         this.files.push(newFile);
+        } else {
+
+          if(this.files.length > 0){
+            this.files = [];
+            this.files.push(newFile);
+          }
         }
       }
+    }
   }
 
   private canBeUpload(file: File): boolean{
@@ -63,6 +71,5 @@ export class NgFilesDirective extends ImageValidator {
     event.stopPropagation();
 
   }
-
 
 }
