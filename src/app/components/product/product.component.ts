@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-product',
@@ -33,7 +35,7 @@ export class ProductComponent implements OnInit {
     this.getTypeProd();
   }
 
-  onUpload() {
+  async onUpload() {
     this.getTypeProd();
     let prod: any = {
       productName: this.productName,
@@ -45,9 +47,8 @@ export class ProductComponent implements OnInit {
       state: this.state
     }
 
-    this.productService.saveProduct(this.files, prod);
-
-    this.clearForm();
+    await this.productService.saveProduct(this.files, prod)
+          .then(resp => $('#AddProductModal').hide());
   }
 
   async loadProducts() {
@@ -72,7 +73,6 @@ export class ProductComponent implements OnInit {
 
   clearForm() {
     this.productName = '';
-    this.productPrice = 0;
     this.productDesc = '';
     this.isNew = true;
     this.isSeason = false;

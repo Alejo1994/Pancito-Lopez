@@ -2,7 +2,7 @@
     <div *ngFor="let item of products" class="card">
         <img src="{{item.data.url}}" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{{item.data.name}}</h5>
+            <h4 class="card-title border-bottom"><i class="fas fa-angle-right"></i> {{item.data.name}}</h4>
             <p class="card-text">{{item.data.description}}</p>
             <h5 class="card-text text-right">₡{{item.data.price}}</h5>
         </div>

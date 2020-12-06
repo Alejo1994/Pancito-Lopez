@@ -18,6 +18,10 @@ import { ProductService } from './services/product.service';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from './shared/table/table.component';
 import { CardsComponent } from './shared/cards/cards.component';
+import { LoginComponent } from './components/login/login.component';
+import { SingInComponent } from './components/sing-in/sing-in.component';
+
+
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { CardsComponent } from './shared/cards/cards.component';
     NgFilesDirective,
     ProductComponent,
     TableComponent,
-    CardsComponent
+    CardsComponent,
+    LoginComponent,
+    SingInComponent
   ],
   imports: [
     BrowserModule,
