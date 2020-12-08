@@ -9,17 +9,17 @@
                 <div class="form-group">
                     <label for="txtEmail" class="col-2 col-sm-2">Email</label>
                     <div class="col-12 col-sm-12">
-                        <input class="form-control" type="email" id="txtEmail" name="txtEmail" placeholder="Ingrese el correo...">
+                        <input class="form-control" type="email" id="txtEmail" name="txtEmail" [(ngModel)]="email" placeholder="Ingrese el correo...">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="txtPassword" class="col-2 col-sm-2">Contraseña</label>
                     <div class="col-12 col-sm-12">
-                        <input class="form-control" type="password" id="txtPassword" name="txtPassword">
+                        <input class="form-control" type="password" id="txtPassword" [(ngModel)]="password" name="txtPassword">
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-success form-control">Login</button>
+                    <button class="btn btn-success form-control" (click)="login()">Login</button>
                 </div>
             </form>
         </div>
