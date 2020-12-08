@@ -11,30 +11,25 @@ import { Product } from '../models/product';
 export class ProductService {
 
   private MEDIA_STORAGE_PATH = 'img';
-  private productLis: Observable<any>;
 
   constructor(private storage: AngularFireStorage,
     private db: AngularFirestore) { }
 
-  async saveProduct(images: Product[],
-    prod: any) {
+
+  async saveProduct(item: File, prod: any) {
     let product = {};
 
-    for (const item of images) {
-      item.uploading = true;
+    const filePath = this.generateFileName(item[0].name);
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, item[0]);
 
-      const filePath = this.generateFileName(item.imageName);
-      const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, item.file);
-
-      item.uploadPercent = task.percentageChanges();
-      task.snapshotChanges()
-        .pipe(
-          finalize(async () => {
-            item.downloadUrl = fileRef.getDownloadURL();
-            item.downloadUrl.subscribe(resp => {
+    task.snapshotChanges()
+      .pipe(
+        finalize(async () => {
+          fileRef.getDownloadURL()
+            .subscribe(resp => {
               product = {
-                imageName: item.imageName,
+                imageName: item[0].name,
                 url: resp.toString(),
                 name: prod.productName,
                 description: prod.productDesc,
@@ -47,10 +42,8 @@ export class ProductService {
 
               this.saveProd(product);
             });
-            item.uploading = false;
-          })
-        ).subscribe();
-    }
+        })
+      ).subscribe();
   }
 
   private saveProd(product: any) {

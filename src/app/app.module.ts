@@ -20,8 +20,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 import { environment } from '../environments/environment';
 
-import { NgFilesDirective } from './directives/ng-files.directive';
-
 import { ProductService } from './services/product.service';
 import { AuthService } from './services/auth.service';
 
@@ -32,7 +30,6 @@ import { AuthService } from './services/auth.service';
     AboutComponent,
     MenuComponent,
     FooterComponent,
-    NgFilesDirective,
     ProductComponent,
     TableComponent,
     CardsComponent,

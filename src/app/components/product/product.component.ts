@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import * as $ from 'jquery';
-import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-product',
@@ -20,8 +18,8 @@ export class ProductComponent implements OnInit {
   state = true;
   typeProd = 'isRegular';
 
-  files: Product[] = [];
   isOverDrop = false;
+  file: File;
 
   newProducts: any[] = [];
   seasonProducts: any[] = [];
@@ -47,24 +45,26 @@ export class ProductComponent implements OnInit {
       state: this.state
     }
 
-    await this.productService.saveProduct(this.files, prod)
-          .then(resp => $('#AddProductModal').hide());
+    await this.productService.saveProduct(this.file, prod)
+      .then(resp => $('#AddProductModal').hide());
+    
+    this.clearForm();
   }
 
   async loadProducts() {
-     (await this.productService.getAllProducts())
+    (await this.productService.getAllProducts())
       .subscribe(resp => {
-        this.newProducts=[];
-        this.seasonProducts=[];
-        this.regularProducts=[];
+        this.newProducts = [];
+        this.seasonProducts = [];
+        this.regularProducts = [];
         resp.forEach((element: any) => {
           if (element.data.isNew) {
             this.newProducts.push(element);
           }
-          if(element.data.isSeason){
+          if (element.data.isSeason) {
             this.seasonProducts.push(element);
           }
-          if(element.data.isRegular){
+          if (element.data.isRegular) {
             this.regularProducts.push(element);
           }
         });
@@ -72,12 +72,12 @@ export class ProductComponent implements OnInit {
   }
 
   clearForm() {
+    this.productPrice=null;
     this.productName = '';
     this.productDesc = '';
     this.isNew = true;
     this.isSeason = false;
     this.state = true;
-    this.files = [];
   }
 
   getTypeProd() {
@@ -92,6 +92,10 @@ export class ProductComponent implements OnInit {
 
   async changeState(id: string, state: boolean) {
     await this.productService.updateState(id, state);
+  }
+
+  upload(event) {
+    this.file = event.target.files;
   }
 
 }
