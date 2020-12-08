@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { Product } from '../models/product';
 
@@ -17,6 +16,8 @@ export class ProductService {
 
 
   async saveProduct(item: File, prod: any) {
+    console.log(item);
+    console.log(prod);
     let product = {};
 
     const filePath = this.generateFileName(item[0].name);
@@ -47,6 +48,7 @@ export class ProductService {
   }
 
   private saveProd(product: any) {
+    console.log('SaveProd',product)
     this.db.collection(`product`).add(product);
   }
 

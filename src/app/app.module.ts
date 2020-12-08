@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 
 import { ProductService } from './services/product.service';
 import { AuthService } from './services/auth.service';
+import { AddProductComponent } from './components/product/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +36,16 @@ import { AuthService } from './services/auth.service';
     CardsComponent,
     LoginComponent,
     SingInComponent,
-    SignOutComponent
+    SignOutComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ReactiveFormsModule
   ],
   providers: [
     ProductService,

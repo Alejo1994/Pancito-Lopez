@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import * as $ from 'jquery';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Product } from 'src/app/models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -9,46 +12,21 @@ import * as $ from 'jquery';
 })
 export class ProductComponent implements OnInit {
 
-  productName: string;
-  productPrice: number;
-  productDesc: string;
-  isNew = false;
-  isSeason = false;
-  isRegular = true;
-  state = true;
-  typeProd = 'isRegular';
+  product: Product;
 
-  isOverDrop = false;
   file: File;
 
   newProducts: any[] = [];
   seasonProducts: any[] = [];
   regularProducts: any[] = [];
 
-  constructor(private productService: ProductService) { }
-
-  ngOnInit(): void {
-    this.clearForm();
-    this.loadProducts();
-    this.getTypeProd();
+  constructor(private productService: ProductService,
+              private router:Router) {
+    this.product = new Product();
   }
 
-  async onUpload() {
-    this.getTypeProd();
-    let prod: any = {
-      productName: this.productName,
-      productDesc: this.productDesc,
-      productPrice: this.productPrice,
-      isNew: this.isNew,
-      isSeason: this.isSeason,
-      isRegular: this.isRegular,
-      state: this.state
-    }
-
-    await this.productService.saveProduct(this.file, prod)
-      .then(resp => $('#AddProductModal').hide());
-    
-    this.clearForm();
+  ngOnInit(): void {
+    this.loadProducts();
   }
 
   async loadProducts() {
@@ -71,21 +49,6 @@ export class ProductComponent implements OnInit {
       });
   }
 
-  clearForm() {
-    this.productPrice=null;
-    this.productName = '';
-    this.productDesc = '';
-    this.isNew = true;
-    this.isSeason = false;
-    this.state = true;
-  }
-
-  getTypeProd() {
-    this.isNew = (this.typeProd === 'isNew');
-    this.isSeason = (this.typeProd === 'isSeason');
-    this.isRegular = (this.typeProd === 'isRegular');
-  }
-
   async deleteProduct(id: string) {
     await this.productService.deleteProduct(id);
   }
@@ -94,8 +57,8 @@ export class ProductComponent implements OnInit {
     await this.productService.updateState(id, state);
   }
 
-  upload(event) {
-    this.file = event.target.files;
+  addProduct(){
+    this.router.navigate(['product/addProduct']);
   }
 
 }

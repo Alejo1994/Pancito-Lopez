@@ -1,111 +1,30 @@
 <div class="container">
 
-    <div class="modal fade" id="AddProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Registrar Producto</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row mt-1">
-                            <label for="txtProductName" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="txtProductName" id="txtProductName"
-                                    [(ngModel)]="productName">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="txtProductDesc" class="col-sm-2 col-form-label">Descripción</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="txtProductDesc" id="txtProductDesc" rows="3"
-                                    [(ngModel)]="productDesc"></textarea>
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="txtPrecio" class="col-sm-2 col-form-label">Precio</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" name="txtPrecio" id="txtPrecio"
-                                    [(ngModel)]="productPrice" placeholder="0">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Tipo</label>
-                            <div class="col-sm-10">
-
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="productType" id="productType3"
-                                        value="isRegular" [(ngModel)]="typeProd" checked>
-                                    <label class="form-check-label" for="productType3">
-                                        Regular
-                                    </label>
-                                </div>
-
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="productType" id="productType1"
-                                        value="isNew" [(ngModel)]="typeProd">
-                                    <label class="form-check-label" for="productType1">
-                                        Nuevo
-                                    </label>
-                                </div>
-
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="productType" id="productType2"
-                                        value="isSeason" [(ngModel)]="typeProd">
-                                    <label class="form-check-label" for="productType2">
-                                        Temporada
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="iflImage" class="col-sm-2 col-form-label">Imagen</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" name="iflImage" id="iflImage"
-                                    (change)="upload($event)">
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" (click)="onUpload()"
-                        [disabled]="!file" data-dismiss="modal">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <button type="button" class="btn btn-primary mt-3 mb-3 float-right" data-toggle="modal"
-        data-target="#AddProductModal">
+    <button type="button" class="btn btn-primary mt-3 mb-3 float-right" (click)="addProduct()">
         <i class="far fa-plus-square"></i> Agregar
     </button>
 
     <div *ngIf="seasonProducts.length > 0" class="mt-3">
         <h3>Productos de Temporada</h3>
-   
-        <app-table [products]='seasonProducts' ></app-table>
+
+        <app-table [products]='seasonProducts'></app-table>
 
 
     </div>
-    
+
     <div *ngIf="newProducts.length > 0" class="mt-3">
         <h3>Productos Nuevos</h3>
-    
+
         <app-table [products]='newProducts'></app-table>
-    
+
     </div>
 
     <div *ngIf="regularProducts.length > 0" class="mt-3">
         <h3>Productos Regulares</h3>
-    
+
         <app-table [products]='regularProducts'></app-table>
- 
+
     </div>
 
 </div>

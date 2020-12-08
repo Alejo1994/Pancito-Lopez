@@ -1,22 +1,24 @@
-import { Observable } from 'rxjs';
-
 export class Product {
+    
+    isNew:boolean;
+    isSeason:boolean;
+    isRegular:boolean;
+    productDesc:string; 
+    productName:string;
+    productPrice:number;
+    productType:string;
+    state:boolean;
 
-    productName = '';
-    productPrice=0;
-    productDesc= ''; 
-    isNew= false;
-    isSeason= false;
-    isRegular= false;
-    state= true;
-
-    imageName: string;
-    uploading = false;
-    uploadPercent: Observable<number>;
-    downloadUrl: Observable<string>;
-    url: string;
-
-    constructor(public file: File = file){
-        this.imageName = file.name;
+    constructor(){
+        this.productName = '';
+        this.productPrice=0;
+        this.productDesc= ''; 
+        this.isNew= false;
+        this.isSeason= false;
+        this.isRegular= false;
+        this.state= true;
+        this.productType='isRegular';
+        
     }
+
 }
