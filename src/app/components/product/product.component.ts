@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/product';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product',
@@ -47,14 +48,6 @@ export class ProductComponent implements OnInit {
           }
         });
       });
-  }
-
-  async deleteProduct(id: string) {
-    await this.productService.deleteProduct(id);
-  }
-
-  async changeState(id: string, state: boolean) {
-    await this.productService.updateState(id, state);
   }
 
   addProduct(){

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -66,8 +67,13 @@ export class AddProductComponent implements OnInit {
       this.file = event.target.files;
     }
     else{
-      console.log('isNotImage');
       this.file=null;
+      Swal.fire({
+        icon: 'error',
+        title: `Archivo invalido, debe ser una imagen`,
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   }
 

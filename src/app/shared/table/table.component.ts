@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table',
@@ -9,8 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class TableComponent implements OnInit {
 
   @Input() products: any[] = [];
-
-
+  
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -18,11 +18,64 @@ export class TableComponent implements OnInit {
   }
 
   async deleteProduct(id: string) {
-    await this.productService.deleteProduct(id);
+    console.log('delete product')
+    Swal.fire({
+      title: '¿Quieres eliminar el producto?',
+      showCancelButton: true,
+      confirmButtonText: `Si`,
+      cancelButtonText:'Cancelar'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        await this.productService.deleteProduct(id).then(()=>  Swal.fire('Producto eliminado', '', 'success'));
+       
+      } 
+    })
+    
   }
 
   async changeState(id: string, state: boolean) {
-    await this.productService.updateState(id, state);
+
+    await this.productService.updateState(id, state).then(()=>{
+      if(state){
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto activado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Producto inactivado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    });
+  }
+
+  async updatePrice(id: string){
+   Swal.fire({
+      title: 'Ingrese el nuevo precio',
+      input: 'number',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText:'Cancelar'
+      
+    }).then(async(result) => {
+      await this.productService.updatePrice(id,result.value).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'El precio se ha actualizado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+    })
   }
 
 }

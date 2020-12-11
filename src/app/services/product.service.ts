@@ -76,4 +76,9 @@ export class ProductService {
     });
   }
 
+  async updatePrice(docId: string, newPrice: number) {
+    this.db.doc(`product/${docId}`).update({
+      price: newPrice
+    });
+  }
 }

@@ -7,6 +7,7 @@
             <th scope="col">Precio</th>
             <th scope="col">Estado</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,11 @@
                 <button *ngIf="!product.data.state" class="btn btn-danger"
                     (click)="changeState(product.id, !product.data.state)">Inactivo</button>
 
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="updatePrice(product.id)">
+                    <i class="fas fa-dollar-sign"></i>
+                </button>
             </td>
             <td>
                 <button class="btn btn-danger" (click)="deleteProduct(product.id)">

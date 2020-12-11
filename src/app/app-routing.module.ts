@@ -15,7 +15,6 @@ const routes: Routes = [
   {path: 'menu', component: MenuComponent},
   {path: 'product', component: ProductComponent, canActivate:[AuthGuard] },
   {path: 'product/addProduct', component: AddProductComponent, canActivate:[AuthGuard] },
-  {path: 'singIn', component: SingInComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[SignOutGuard]},
   {path: 'signOut', component: SignOutComponent, canActivate:[AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'menu'}

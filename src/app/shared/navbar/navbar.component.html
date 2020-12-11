@@ -15,14 +15,11 @@
                 <a class="nav-link" routerLink='about'>Acerca de</a>
             </li>
             <li *ngIf="auth" class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink='product'>Product</a>
+                <a class="nav-link" routerLink='product'>Productos</a>
             </li>
         </ul>
         <span class="navbar-text">
             <ul class="navbar-nav mr-auto">
-                <li *ngIf="auth" class="nav-item float-right" routerLinkActive="active">
-                    <a class="nav-link" routerLink='singIn'>Registrar</a>
-                </li>
                 <li *ngIf="!auth" class="nav-item text-right" routerLinkActive="active">
                     <a class="nav-link" routerLink='login'>Iniciar Sesión</a>
                 </li>
