@@ -26,7 +26,14 @@ export class TableComponent implements OnInit {
       cancelButtonText:'Cancelar'
     }).then(async(result) => {
       if (result.isConfirmed) {
-        await this.productService.deleteProduct(id).then(()=>  Swal.fire('Producto eliminado', '', 'success'));
+        await this.productService.deleteProduct(id).then(()=>  {
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto eliminado',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        });
        
       } 
     })

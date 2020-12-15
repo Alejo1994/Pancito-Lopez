@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Router } from '@angular/router';
 import { finalize, map } from 'rxjs/operators';
-import { Product } from '../models/product';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,20 @@ export class ProductService {
   private MEDIA_STORAGE_PATH = 'img';
 
   constructor(private storage: AngularFireStorage,
-    private db: AngularFirestore) { }
+    private db: AngularFirestore,
+    private router: Router) { }
 
 
   async saveProduct(item: File, prod: any) {
-    console.log(item);
-    console.log(prod);
+    Swal.fire({
+      title: 'Por favor espere !',
+      html: 'Guardando...',
+      showConfirmButton: false,
+      willOpen: () => {
+          Swal.showLoading()
+      },
+  });
+
     let product = {};
 
     const filePath = this.generateFileName(item[0].name);
@@ -28,28 +37,29 @@ export class ProductService {
       .pipe(
         finalize(async () => {
           fileRef.getDownloadURL()
-            .subscribe(resp => {
+            .subscribe(async resp => {
               product = {
                 imageName: item[0].name,
                 url: resp.toString(),
                 name: prod.productName,
                 description: prod.productDesc,
-                price: prod.productPrice,
-                isNew: prod.isNew,
-                isSeason: prod.isSeason,
-                isRegular: prod.isRegular,
-                state: prod.state
+                state: prod.state,
+                productType: prod.productType,
+                price: prod.productPrice
               };
 
-              this.saveProd(product);
+              await this.saveProd(product)
+                .then(() => {
+                  Swal.close();
+                  this.router.navigate(['product']);
+                });
             });
         })
       ).subscribe();
   }
 
-  private saveProd(product: any) {
-    console.log('SaveProd',product)
-    this.db.collection(`product`).add(product);
+  async saveProd(product: any) {
+    await this.db.collection(`product`).add(product);
   }
 
   // tslint:disable-next-line: typedef

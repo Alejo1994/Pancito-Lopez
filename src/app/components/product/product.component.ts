@@ -1,10 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import * as $ from 'jquery';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/product';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product',
@@ -37,13 +34,13 @@ export class ProductComponent implements OnInit {
         this.seasonProducts = [];
         this.regularProducts = [];
         resp.forEach((element: any) => {
-          if (element.data.isNew) {
+          if (element.data.productType === 'isNew') {
             this.newProducts.push(element);
           }
-          if (element.data.isSeason) {
+          if (element.data.productType === 'isSeason') {
             this.seasonProducts.push(element);
           }
-          if (element.data.isRegular) {
+          if (element.data.productType === 'isRegular') {
             this.regularProducts.push(element);
           }
         });

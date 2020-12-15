@@ -27,13 +27,13 @@ export class MenuComponent implements OnInit {
       this.seasonProducts=[];
       this.regularProducts=[];
       resp.forEach((element: any) => {
-        if (element.data.isNew && element.data.state) {
+        if (element.data.productType === 'isNew' && element.data.state) {
           this.newProducts.push(element);
         }
-        if(element.data.isSeason && element.data.state){
+        if(element.data.productType === 'isSeason' && element.data.state){
           this.seasonProducts.push(element);
         }
-        if(element.data.isRegular && element.data.state){
+        if(element.data.productType === 'isRegular' && element.data.state){
           this.regularProducts.push(element);
         }
       });

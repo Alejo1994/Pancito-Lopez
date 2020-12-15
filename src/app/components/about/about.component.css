@@ -5,6 +5,12 @@ h1, h2 {
 
 p {
     font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    color: gray;
+}
+
+.justify {
+    font-family: 'Times New Roman', Times, serif;
     text-align: justify;
     color: gray;
 }

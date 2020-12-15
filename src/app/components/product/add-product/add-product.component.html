@@ -65,10 +65,21 @@
         </div>
         <div class="form-group row">
             <div class="input-group">
-                <label for="iflImage" class="input-group-text">Imagen</label>
+                <div class="input-group-prepend">
+                    <label for="iflImage" class="input-group-text">Imagen</label>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="iflImage" id="iflImage"
+                        aria-describedby="iflImage" (change)="upload($event)">
+                    <label *ngIf='!file' class="custom-file-label" for="iflImage">
+                        Seleccione archivo
+                    </label>
 
-                <input type="file" class="form-control" name="iflImage" id="iflImage" (change)="upload($event)"
-                    #uploadImage>
+                    <label *ngIf='file' class="custom-file-label" for="iflImage">
+                        {{file[0].name}}
+                    </label>
+
+                </div>
             </div>
         </div>
 
