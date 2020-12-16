@@ -1,10 +1,22 @@
 {
   "hosting": {
-    "public": "dist/pancitoLopez",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
+      "public": "dist/pancitoLopez",
+      "ignore": [
+          "firebase.json",
+          "**/.*",
+          "**/node_modules/**"
+      ],
+      "rewrites": [{
+              "source": "/public/**",
+              "destination": "/public.html"
+          },
+          {
+              "source": "**",
+              "destination": "/index.html"
+          }
+      ],
+      "storage": {
+          "rules": "storage.rules"
+      }
   }
-}
+  }

@@ -1,5 +1,5 @@
-h4 {
-    font-family: 'Yellowtail';
+h1, h2, .card-title {
+    font-family: 'Yellowtail', cursive;
     text-transform: capitalize;
 }
 
@@ -10,9 +10,6 @@ p {
     text-align: center;
 }
 
-.text-right {
+.btn-primary{
     font-family: 'Yeon Sung', cursive;
-    font-size: large;
-    text-align: center;
 }
-

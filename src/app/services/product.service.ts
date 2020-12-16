@@ -23,9 +23,9 @@ export class ProductService {
       html: 'Guardando...',
       showConfirmButton: false,
       willOpen: () => {
-          Swal.showLoading()
+        Swal.showLoading()
       },
-  });
+    });
 
     let product = {};
 

@@ -1,0 +1,19 @@
+h1{
+    font-family: 'Yellowtail', cursive;
+    text-transform: capitalize;
+}
+
+label, .btn-success{
+    font-family: 'Yeon Sung', cursive;
+    font-size: large;
+    text-align: center;
+}
+
+label {
+    color: gray;
+}
+
+.text-format{
+    font-family: 'Yeon Sung', cursive;
+    font-size: large;
+}

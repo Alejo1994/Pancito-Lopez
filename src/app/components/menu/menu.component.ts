@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -9,35 +10,59 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  productType: string;
+  title: string;
+  products: any[] = [];
 
-  products:any[]=[];
-  newProducts: any [] = [];
-  seasonProducts: any [] = [];
-  regularProducts: any [] = [];
+  constructor(private productService: ProductService,
+    private route: ActivatedRoute,
+    private router: Router) {
 
-  ngOnInit(): void {
-    this.loadProducts();
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+        this.loadProducts();
+      }
+    });
+
   }
 
-  async loadProducts(){
-    (await this.productService.getAllProducts())
-    .subscribe(resp => {
-      this.newProducts=[];
-      this.seasonProducts=[];
-      this.regularProducts=[];
-      resp.forEach((element: any) => {
-        if (element.data.productType === 'isNew' && element.data.state) {
-          this.newProducts.push(element);
-        }
-        if(element.data.productType === 'isSeason' && element.data.state){
-          this.seasonProducts.push(element);
-        }
-        if(element.data.productType === 'isRegular' && element.data.state){
-          this.regularProducts.push(element);
-        }
-      });
+  ngOnInit(): void {
+    this.productType = this.route.snapshot.paramMap.get("productType");
+    switch (this.productType) {
+      case 'isNew':
+        this.title = 'Productos Nuevos';
+        break;
+      case 'isSeason':
+        this.title = 'Productos de Temporada'
+        break;
+      case 'isRegular':
+        this.title = 'Productos Regulares'
+        break;
+    }
+  }
+
+  async loadProducts() {
+
+    Swal.fire({
+      title: 'Por favor espere!',
+      html: 'Cargando...',
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading()
+      },
     });
+
+    this.products = [];
+    (await this.productService.getAllProducts())
+      .subscribe(resp => {
+        resp.forEach((element: any) => {
+          if (element.data.productType === this.productType && element.data.state) {
+            this.products.push(element);
+          }
+        });
+        Swal.close();
+      });
   }
 
 }
