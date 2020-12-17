@@ -91,4 +91,22 @@ export class ProductService {
       price: newPrice
     });
   }
+
+  async updateDesc(docId: string, desc: string) {
+    this.db.doc(`product/${docId}`).update({
+      description: desc
+    });
+  }
+
+  async updateProductType(docId: string, productType: string) {
+    this.db.doc(`product/${docId}`).update({
+      productType: productType
+    });
+  }
+  
+  async updateName(docId: string, name: string) {
+    this.db.doc(`product/${docId}`).update({
+      name: name
+    });
+  }
 }

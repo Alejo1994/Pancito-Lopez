@@ -17,6 +17,8 @@ export class MenuComponent implements OnInit {
   constructor(private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router) {
+      console.log('constructor');
+    this.products = [];
 
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
@@ -28,6 +30,8 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit');
+    this.products = [];
     this.productType = this.route.snapshot.paramMap.get("productType");
     switch (this.productType) {
       case 'isNew':
@@ -43,7 +47,7 @@ export class MenuComponent implements OnInit {
   }
 
   async loadProducts() {
-
+    console.log('loadProducts');
     Swal.fire({
       title: 'Por favor espere!',
       html: 'Cargando...',

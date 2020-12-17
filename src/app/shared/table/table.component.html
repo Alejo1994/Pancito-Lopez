@@ -1,35 +1,53 @@
 <table class="table mt-3">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Precio</th>
+            <th colspan="2" scope="col">Nombre</th>
+            <th colspan="2" scope="col">Descripción</th>
+            <th colspan="2" scope="col">Precio</th>
             <th scope="col">Estado</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
+
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let product of products; let i = index">
-            <th scope="row">{{i + 1}}</th>
-            <td>{{product.data.name}}</td>
-            <td>{{product.data.description}}</td>
-            <td>₡{{product.data.price}}</td>
             <td>
-                <button *ngIf="product.data.state" class="btn btn-success"
-                    (click)="changeState(product.id, !product.data.state)">Activo</button>
-                <button *ngIf="!product.data.state" class="btn btn-danger"
-                    (click)="changeState(product.id, !product.data.state)">Inactivo</button>
-
+                <button type="button" class="btn btn-primary" (click)="changeName(product.id, product.data.name)" data-toggle="tooltip" data-placement="left" title="Actualizar nombre"><i
+                        class="fas fa-pencil-alt"></i></button>
             </td>
             <td>
-                <button class="btn btn-primary" (click)="updatePrice(product.id)">
+                <strong>
+                    {{product.data.name}}
+                </strong>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="changeDesc(product.id, product.data.description)" data-toggle="tooltip" data-placement="left" title="Actualizar descripción"><i
+                        class="fas fa-pencil-alt"></i></button>
+            </td>
+            <td>{{product.data.description}} </td>
+
+            <td>
+                <button class="btn btn-primary" (click)="updatePrice(product.id)" data-toggle="tooltip" data-placement="left" title="Actualizar precio">
                     <i class="fas fa-dollar-sign"></i>
                 </button>
             </td>
+            <td>₡{{product.data.price}}</td>
+
             <td>
-                <button class="btn btn-danger" (click)="deleteProduct(product.id)">
+                <button *ngIf="product.data.state" class="btn btn-success"
+                    (click)="changeState(product.id, !product.data.state)" data-toggle="tooltip" data-placement="left" title="Actualizar estado">Activo</button>
+                <button *ngIf="!product.data.state" class="btn btn-danger"
+                    (click)="changeState(product.id, !product.data.state)"data-toggle="tooltip" data-placement="left" title="Actualizar estado">Inactivo</button>
+
+            </td>
+            <td>
+                <button class="btn btn-warning" (click)='changeProductType(product.id,product.data.productType)' data-toggle="tooltip" data-placement="left" title="Actualizar el tipo del producto"><i
+                        class="fas fa-arrows-alt-v"></i></button>
+            </td>
+            <td>
+                <button class="btn btn-danger" (click)="deleteProduct(product.id)" data-toggle="tooltip" data-placement="left" title="Eliminar producto">
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </td>
