@@ -94,7 +94,6 @@ export class TableComponent implements OnInit {
       inputAttributes: {
         autocapitalize: 'off'
       },
-      showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar'
 
@@ -125,7 +124,6 @@ export class TableComponent implements OnInit {
       inputAttributes: {
         autocapitalize: 'off'
       },
-      showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar'
 
@@ -150,7 +148,6 @@ export class TableComponent implements OnInit {
       inputAttributes: {
         autocapitalize: 'off'
       },
-      showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar'
 

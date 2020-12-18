@@ -24,6 +24,7 @@ import { ProductService } from './services/product.service';
 import { AuthService } from './services/auth.service';
 import { AddProductComponent } from './components/product/add-product/add-product.component';
 import { HomeComponent } from './components/home/home.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HomeComponent } from './components/home/home.component';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     ProductService,
