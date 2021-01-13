@@ -4,12 +4,13 @@ h1, h2, .card-title {
 }
 
 p {
-    font-family: 'Yeon Sung', cursive;
+    /*font-family: 'Yeon Sung', cursive;*/
+    font-family: 'Patrick Hand', cursive;
     font-size: large;
     color: gray;
     text-align: center;
 }
 
 .btn-primary{
-    font-family: 'Yeon Sung', cursive;
+    font-family: 'Patrick Hand', cursive;
 }
